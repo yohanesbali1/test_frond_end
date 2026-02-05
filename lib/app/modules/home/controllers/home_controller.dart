@@ -15,7 +15,39 @@ class HomeController extends GetxController {
     OrderModel(
       id: 1,
       name: 'Choso Dishes',
-      price: 5000,
+      price: 500000,
+      qty: 1,
+      image:
+          'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
+    ),
+    OrderModel(
+      id: 1,
+      name: 'Choso Dishes',
+      price: 500000,
+      qty: 1,
+      image:
+          'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
+    ),
+    OrderModel(
+      id: 1,
+      name: 'Choso Dishes',
+      price: 500000,
+      qty: 1,
+      image:
+          'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
+    ),
+    OrderModel(
+      id: 1,
+      name: 'Choso Dishes',
+      price: 500000,
+      qty: 1,
+      image:
+          'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
+    ),
+    OrderModel(
+      id: 1,
+      name: 'Choso Dishes',
+      price: 500000,
       qty: 1,
       image:
           'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
@@ -42,6 +74,10 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
+  int get subTotal {
+    return order.fold(0, (sum, item) => sum + item.total);
+  }
+
   Future<void> getProducts() async {
     try {
       var response = await productProvider.getProducts();
@@ -60,5 +96,13 @@ class HomeController extends GetxController {
     } catch (e) {
       print(e);
     }
+  }
+
+  void updateNote(int index, String note) {
+    order[index] = order[index].copyWith(note: note);
+  }
+
+  void updateQty(int index, int qty) {
+    order[index] = order[index].copyWith(qty: qty);
   }
 }

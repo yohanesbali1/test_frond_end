@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:testing_front_end_dev/app/core/theme/theme.dart';
 import 'package:testing_front_end_dev/app/modules/home/views/widget/category.dart';
 import 'package:testing_front_end_dev/app/modules/home/views/widget/item.dart';
-import 'package:testing_front_end_dev/app/modules/home/views/widget/order.dart';
+import 'package:testing_front_end_dev/app/modules/home/views/widget/order/order.dart';
 
 import '../controllers/home_controller.dart';
 
