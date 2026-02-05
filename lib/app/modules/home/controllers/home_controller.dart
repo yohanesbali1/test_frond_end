@@ -7,6 +7,7 @@ import 'package:testing_front_end_dev/app/data/providers/product_provider.dart';
 class HomeController extends GetxController {
   //TODO: Implement HomeController
 
+  final selectedIndex = 0.obs;
   final count = 0.obs;
   final date = DateFormat('dd MMMM yyyy').format(DateTime.now());
   final products = [].obs;

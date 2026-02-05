@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testing_front_end_dev/app/core/theme/theme.dart';
 import 'package:testing_front_end_dev/app/modules/home/controllers/home_controller.dart';
+import 'package:testing_front_end_dev/app/modules/home/views/widget/list_item.dart';
 
 class ProductItem extends GetView<HomeController> {
   const ProductItem({super.key});
@@ -38,30 +39,11 @@ class ProductItem extends GetView<HomeController> {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 mainAxisSpacing: 28,
                 crossAxisSpacing: 28,
-                childAspectRatio: 3,
+                childAspectRatio: 0.85,
                 crossAxisCount: 3,
               ),
               itemBuilder: (context, index) {
-                return Container(
-                  decoration: BoxDecoration(color: bgsecondColor),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    spacing: 8,
-                    children: [
-                      Text(
-                        product_item[index].name,
-                        style: GoogleFonts.barlow(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 14,
-                        ),
-                      ),
-                      Text(
-                        product_item[index].price.toString(),
-                        style: GoogleFonts.barlow(fontSize: 14),
-                      ),
-                    ],
-                  ),
-                );
+                return ListItem(product_item: product_item[index]);
               },
             );
           }),

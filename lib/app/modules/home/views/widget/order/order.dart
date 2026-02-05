@@ -26,7 +26,7 @@ class OrderData extends GetView<HomeController> {
                   "Order",
                   style: GoogleFonts.barlow(
                     fontSize: 20,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w800,
                   ),
                 ),
               ],
@@ -44,7 +44,7 @@ class OrderData extends GetView<HomeController> {
                     "Item",
                     style: GoogleFonts.barlow(
                       fontSize: 16,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ),
@@ -54,7 +54,7 @@ class OrderData extends GetView<HomeController> {
                     "Qty",
                     style: GoogleFonts.barlow(
                       fontSize: 16,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ),
@@ -64,7 +64,7 @@ class OrderData extends GetView<HomeController> {
                     "Price",
                     style: GoogleFonts.barlow(
                       fontSize: 16,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w800,
                     ),
                   ),
                 ),

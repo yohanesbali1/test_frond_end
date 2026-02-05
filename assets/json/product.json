@@ -1,8 +1,9 @@
 [
   {
     "id": 1,
-    "name": "Beef Lasagna",
+    "name": "Ice Cream Vanilla with sugar balmon",
     "price": 65000,
+    "image":"https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     "category_id": 1,
     "type": "dine_in"
   },
@@ -11,6 +12,7 @@
     "name": "Chicken Alfredo Pasta",
     "price": 72000,
     "category_id": 1,
+    "image":"https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     "type": "dine_in"
   },
   {
@@ -18,6 +20,7 @@
     "name": "Classic Caesar Salad",
     "price": 58000,
     "category_id": 2,
+    "image":"https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     "type": "takeaway"
   },
   {
@@ -25,6 +28,7 @@
     "name": "Smoked Salmon Salad",
     "price": 85000,
     "category_id": 2,
+    "image":"https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     "type": "dine_in"
   },
   {
@@ -32,6 +36,7 @@
     "name": "Creamy Mushroom Soup",
     "price": 55000,
     "category_id": 3,
+    "image":"https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     "type": "dine_in"
   },
   {
@@ -39,6 +44,7 @@
     "name": "French Onion Soup",
     "price": 60000,
     "category_id": 3,
+    "image":"https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     "type": "takeaway"
   },
   {
@@ -46,6 +52,7 @@
     "name": "Grilled Ribeye Steak",
     "price": 180000,
     "category_id": 4,
+    "image":"https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     "type": "dine_in"
   },
   {
@@ -53,6 +60,7 @@
     "name": "Grilled BBQ Chicken",
     "price": 120000,
     "category_id": 4,
+    "image":"https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     "type": "dine_in"
   },
   {
@@ -60,6 +68,7 @@
     "name": "Garlic Bread",
     "price": 50000,
     "category_id": 5,
+    "image":"https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     "type": "takeaway"
   },
   {
@@ -67,6 +76,7 @@
     "name": "Mozzarella Sticks",
     "price": 65000,
     "category_id": 5,
+    "image":"https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     "type": "dine_in"
   },
   {
@@ -74,6 +84,7 @@
     "name": "Chocolate Lava Cake",
     "price": 70000,
     "category_id": 6,
+    "image":"https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     "type": "dine_in"
   },
   {
@@ -81,6 +92,7 @@
     "name": "Classic Cheesecake",
     "price": 75000,
     "category_id": 6,
+    "image":"https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
     "type": "takeaway"
   }
 ]

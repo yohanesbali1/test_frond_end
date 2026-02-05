@@ -17,22 +17,38 @@ class CategoryItem extends GetView<HomeController> {
       ),
       child: Obx(() {
         final dataCategory = controller.category;
+
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: dataCategory.map((item) {
-              return Container(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                margin: const EdgeInsets.only(right: 16),
-                child: Text(
-                  item.name,
-                  style: GoogleFonts.barlow(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
+            spacing: 32,
+            children: List.generate(dataCategory.length, (index) {
+              final item = dataCategory[index];
+              final isActive = controller.selectedIndex.value == index;
+
+              return GestureDetector(
+                onTap: () {},
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  decoration: BoxDecoration(
+                    border: Border(
+                      bottom: BorderSide(
+                        color: isActive ? mainColor : Colors.transparent,
+                        width: 2,
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    item.name,
+                    style: GoogleFonts.barlow(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: isActive ? mainColor : Colors.white,
+                    ),
                   ),
                 ),
               );
-            }).toList(),
+            }),
           ),
         );
       }),

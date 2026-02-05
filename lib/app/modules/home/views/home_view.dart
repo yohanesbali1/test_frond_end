@@ -6,6 +6,7 @@ import 'package:testing_front_end_dev/app/core/theme/theme.dart';
 import 'package:testing_front_end_dev/app/modules/home/views/widget/category.dart';
 import 'package:testing_front_end_dev/app/modules/home/views/widget/item.dart';
 import 'package:testing_front_end_dev/app/modules/home/views/widget/order/order.dart';
+import 'package:testing_front_end_dev/app/modules/home/views/widget/sidebar.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -21,6 +22,11 @@ class HomeView extends GetView<HomeController> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Container(
+              decoration: BoxDecoration(color: bgsecondColor),
+              width: 104,
+              child: SideBar(),
+            ),
             Expanded(
               child: SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
@@ -44,7 +50,7 @@ class HomeView extends GetView<HomeController> {
                                 'Made Resto',
                                 style: GoogleFonts.barlow(
                                   fontSize: 28,
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: FontWeight.w800,
                                 ),
                               ),
                               Text(

@@ -8,6 +8,7 @@ class Product {
   final int price;
   final int categoryId;
   final OrderType type;
+  final String image;
 
   Product({
     required this.id,
@@ -15,6 +16,7 @@ class Product {
     required this.price,
     required this.categoryId,
     required this.type,
+    required this.image,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
@@ -24,6 +26,7 @@ class Product {
       price: json['price'] as int,
       categoryId: json['category_id'] as int,
       type: _parseOrderType(json['type']),
+      image: json['image'] as String,
     );
   }
 
@@ -34,6 +37,7 @@ class Product {
       'price': price,
       'category_id': categoryId,
       'type': type.name,
+      'image': image,
     };
   }
 
