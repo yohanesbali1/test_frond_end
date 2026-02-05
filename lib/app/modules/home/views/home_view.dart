@@ -28,44 +28,41 @@ class HomeView extends GetView<HomeController> {
               child: SideBar(),
             ),
             Expanded(
-              child: SingleChildScrollView(
-                physics: const AlwaysScrollableScrollPhysics(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 24,
-                        horizontal: 20,
-                      ),
-                      child: Row(
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            spacing: 4,
-                            children: [
-                              Text(
-                                'Made Resto',
-                                style: GoogleFonts.barlow(
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.w800,
-                                ),
-                              ),
-                              Text(
-                                controller.date,
-                                style: GoogleFonts.barlow(fontSize: 16),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 24,
+                      horizontal: 20,
                     ),
-                    CategoryItem(),
-                    ProductItem(),
-                  ],
-                ),
+                    child: Row(
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          spacing: 4,
+                          children: [
+                            Text(
+                              'Made Resto',
+                              style: GoogleFonts.barlow(
+                                fontSize: 28,
+                                fontWeight: FontWeight.w800,
+                              ),
+                            ),
+                            Text(
+                              controller.date,
+                              style: GoogleFonts.barlow(fontSize: 16),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  CategoryItem(),
+                  Expanded(child: ProductItem()),
+                ],
               ),
             ),
             Container(
