@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:testing_front_end_dev/app/data/models/models.dart';
@@ -17,12 +18,12 @@ class HomeController extends GetxController {
       id: 1,
       name: 'Choso Dishes',
       price: 500000,
-      qty: 1,
+      qty: 4,
       image:
           'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
     ),
     OrderModel(
-      id: 1,
+      id: 2,
       name: 'Choso Dishes',
       price: 500000,
       qty: 1,
@@ -30,7 +31,7 @@ class HomeController extends GetxController {
           'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
     ),
     OrderModel(
-      id: 1,
+      id: 3,
       name: 'Choso Dishes',
       price: 500000,
       qty: 1,
@@ -38,7 +39,7 @@ class HomeController extends GetxController {
           'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
     ),
     OrderModel(
-      id: 1,
+      id: 4,
       name: 'Choso Dishes',
       price: 500000,
       qty: 1,
@@ -46,7 +47,7 @@ class HomeController extends GetxController {
           'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
     ),
     OrderModel(
-      id: 1,
+      id: 5,
       name: 'Choso Dishes',
       price: 500000,
       qty: 1,
@@ -99,11 +100,22 @@ class HomeController extends GetxController {
     }
   }
 
-  void updateNote(int index, String note) {
-    order[index] = order[index].copyWith(note: note);
-  }
+  void addOrder(Product product) {
+    final orderItem = order.firstWhereOrNull((e) => e.id == product.id);
 
-  void updateQty(int index, int qty) {
-    order[index] = order[index].copyWith(qty: qty);
+    if (orderItem == null) {
+      order.add(
+        OrderModel(
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          qty: 1,
+        ),
+      );
+    } else {
+      final i = order.indexOf(orderItem);
+      order[i] = orderItem.copyWith(qty: orderItem.qty + 1);
+    }
   }
 }

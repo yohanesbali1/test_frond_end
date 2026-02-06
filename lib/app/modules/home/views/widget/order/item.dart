@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/state_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testing_front_end_dev/app/core/theme/theme.dart';
 import 'package:testing_front_end_dev/app/data/models/models.dart';
 import 'package:testing_front_end_dev/app/modules/home/controllers/order_controller.dart';
 
-class ItemOrder extends GetView<OrderDetailController> {
+class ItemOrder extends StatelessWidget {
+  final OrderDetailController controller;
   final OrderModel order;
-  final int index;
-  const ItemOrder({required this.order, required this.index});
+  const ItemOrder({Key? key, required this.controller, required this.order})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    controller.order = order;
     return Container(
       padding: EdgeInsets.symmetric(vertical: 20),
       child: Column(
@@ -63,18 +62,28 @@ class ItemOrder extends GetView<OrderDetailController> {
                       width: 48,
                       height: 48,
                       child: TextField(
-                        controller: controller.qtyC,
+                        enabled: false,
+                        controller: controller.qtyController,
+                        textAlign: TextAlign.center,
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                         ],
                         onChanged: (val) {
-                          controller.home_c.updateNote(index, val);
+                          final qty = int.tryParse(val) ?? 1;
+                          controller.updateQty(qty);
+                        },
+                        onEditingComplete: () {
+                          if (controller.qtyController.text.isEmpty) {
+                            controller.qtyController.text = '1';
+                          }
                         },
                         keyboardType: TextInputType.number,
                         style: GoogleFonts.barlow(
                           fontSize: 14,
+                          color: Colors.white,
                           fontWeight: FontWeight.w400,
                         ),
+
                         decoration: InputDecoration(
                           hintText: 'Qty',
                           isDense: true,
@@ -111,13 +120,33 @@ class ItemOrder extends GetView<OrderDetailController> {
                     Column(
                       spacing: 10,
                       children: [
-                        Container(
-                          child: Icon(Icons.arrow_circle_up, color: mainColor),
+                        GestureDetector(
+                          onTap: () => {
+                            controller.qtyController.text = (order.qty + 1)
+                                .toString(),
+                            controller.updateQty(order.qty + 1),
+                          },
+                          child: Container(
+                            child: Icon(
+                              Icons.arrow_circle_up,
+                              color: mainColor,
+                            ),
+                          ),
                         ),
-                        Container(
-                          child: Icon(
-                            Icons.arrow_circle_down,
-                            color: mainColor,
+                        GestureDetector(
+                          onTap: () => {
+                            if (order.qty > 1)
+                              {
+                                controller.qtyController.text = (order.qty - 1)
+                                    .toString(),
+                                controller.updateQty(order.qty - 1),
+                              },
+                          },
+                          child: Container(
+                            child: Icon(
+                              Icons.arrow_circle_down,
+                              color: mainColor,
+                            ),
                           ),
                         ),
                       ],
@@ -143,10 +172,10 @@ class ItemOrder extends GetView<OrderDetailController> {
             children: [
               Expanded(
                 child: TextField(
-                  controller: controller.noteC,
+                  controller: controller.noteController,
 
                   onChanged: (val) {
-                    controller.home_c.updateNote(index, val);
+                    controller.updateNote(val);
                   },
                   keyboardType: TextInputType.number,
                   style: GoogleFonts.barlow(
@@ -191,14 +220,18 @@ class ItemOrder extends GetView<OrderDetailController> {
                   ),
                 ),
               ),
-              Container(
-                width: 48,
-                height: 48,
-                decoration: BoxDecoration(
-                  border: Border.all(color: mainColor, width: 1),
-                  borderRadius: BorderRadius.circular(10),
+
+              GestureDetector(
+                onTap: () => controller.removeItem(),
+                child: Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: mainColor, width: 1),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Icon(Icons.delete, color: redColor),
                 ),
-                child: Icon(Icons.delete, color: redColor),
               ),
             ],
           ),

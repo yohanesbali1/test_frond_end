@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/state_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testing_front_end_dev/app/core/theme/theme.dart';
 import 'package:testing_front_end_dev/app/modules/home/controllers/home_controller.dart';
+import 'package:testing_front_end_dev/app/modules/home/controllers/order_controller.dart';
 import 'package:testing_front_end_dev/app/modules/home/views/widget/order/count_order.dart';
 import 'package:testing_front_end_dev/app/modules/home/views/widget/order/item.dart';
 
@@ -78,7 +78,16 @@ class OrderData extends GetView<HomeController> {
                 physics: const AlwaysScrollableScrollPhysics(),
                 itemCount: order.length,
                 itemBuilder: (context, index) {
-                  return ItemOrder(order: order[index], index: index);
+                  return GetBuilder<OrderDetailController>(
+                    tag: order[index].id.toString(),
+                    key: ValueKey(order[index].id),
+                    init: OrderDetailController(order[index]),
+                    builder: (controller) {
+                      final order =
+                          controller.order.value; // bisa ambil langsung
+                      return ItemOrder(order: order, controller: controller);
+                    },
+                  );
                 },
               );
             }),
