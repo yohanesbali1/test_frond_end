@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testing_front_end_dev/app/modules/home/controllers/home_controller.dart';
+import 'package:testing_front_end_dev/app/modules/home/views/widget/flip.dart';
 import 'package:testing_front_end_dev/app/modules/home/views/widget/list_item.dart';
 
 class ProductItem extends GetView<HomeController> {
@@ -43,7 +44,7 @@ class ProductItem extends GetView<HomeController> {
                   crossAxisCount: 3,
                 ),
                 itemBuilder: (context, index) {
-                  return ListItem(product_item: product_item[index]);
+                  return FlipItemWidget(productItem: product_item[index]);
                 },
               );
             }),
