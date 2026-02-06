@@ -50,7 +50,7 @@ class HomeController extends GetxController {
     } catch (e) {
       print(e);
     } finally {
-      isLoading.value = true;
+      isLoading.value = false;
     }
   }
 
@@ -61,7 +61,7 @@ class HomeController extends GetxController {
     } catch (e) {
       print(e);
     } finally {
-      isLoading.value = true;
+      isLoading.value = false;
     }
   }
 

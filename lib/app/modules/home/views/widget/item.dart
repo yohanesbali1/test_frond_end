@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:testing_front_end_dev/app/modules/home/controllers/home_controller.dart';
 import 'package:testing_front_end_dev/app/modules/home/views/widget/empty_product.dart';
 import 'package:testing_front_end_dev/app/modules/home/views/widget/list_item.dart';
+import 'package:testing_front_end_dev/app/modules/home/views/widget/list_item_skeleton.dart';
 
 class ProductItem extends GetView<HomeController> {
   const ProductItem({super.key});
@@ -34,7 +35,19 @@ class ProductItem extends GetView<HomeController> {
               final productItem = controller.products;
 
               if (controller.isLoading.value) {
-                return const SizedBox();
+                return GridView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: 6, // jumlah skeleton placeholder
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisSpacing: 28,
+                    crossAxisSpacing: 28,
+                    childAspectRatio: 0.85,
+                    crossAxisCount: 3,
+                  ),
+                  itemBuilder: (context, index) {
+                    return const ListItemSkeleton(); // widget skeleton
+                  },
+                );
               }
 
               if (productItem.isEmpty) {
