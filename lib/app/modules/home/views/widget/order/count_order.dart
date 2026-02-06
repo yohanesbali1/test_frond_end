@@ -54,11 +54,13 @@ class CountOrder extends GetView<HomeController> {
                 ),
               ),
               const Spacer(),
-              Text(
-                controller.subTotal.toString(),
-                style: GoogleFonts.barlow(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
+              Obx(
+                () => Text(
+                  controller.subTotal.toString(),
+                  style: GoogleFonts.barlow(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ],

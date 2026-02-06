@@ -34,18 +34,39 @@ class ProductItem extends GetView<HomeController> {
                 return SizedBox();
               }
               if (product_item.isEmpty) return SizedBox();
-              return GridView.builder(
-                physics: const AlwaysScrollableScrollPhysics(),
-                itemCount: product_item.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  mainAxisSpacing: 28,
-                  crossAxisSpacing: 28,
-                  childAspectRatio: 0.85,
-                  crossAxisCount: 3,
+              return ScrollConfiguration(
+                behavior: const ScrollBehavior().copyWith(overscroll: false),
+                child: GridView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: product_item.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisSpacing: 28,
+                    crossAxisSpacing: 28,
+                    childAspectRatio: 0.85,
+                    crossAxisCount: 3,
+                  ),
+                  itemBuilder: (context, index) {
+                    return GetBuilder<HomeController>(
+                      id: 'item_$index',
+                      builder: (_) {
+                        return Listener(
+                          onPointerDown: (_) => controller.press(index),
+                          onPointerUp: (_) {
+                            controller.release(index);
+                            controller.addOrder(product_item[index]);
+                          },
+                          onPointerCancel: (_) => controller.release(index),
+                          child: AnimatedScale(
+                            scale: controller.scaleOf(index),
+                            duration: const Duration(milliseconds: 90),
+                            curve: Curves.easeOut,
+                            child: ListItem(product_item: product_item[index]),
+                          ),
+                        );
+                      },
+                    );
+                  },
                 ),
-                itemBuilder: (context, index) {
-                  return FlipItemWidget(productItem: product_item[index]);
-                },
               );
             }),
           ),

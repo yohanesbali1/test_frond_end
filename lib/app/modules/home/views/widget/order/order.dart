@@ -74,21 +74,27 @@ class OrderData extends GetView<HomeController> {
           Expanded(
             child: Obx(() {
               final order = controller.order;
-              return ListView.builder(
-                physics: const AlwaysScrollableScrollPhysics(),
-                itemCount: order.length,
-                itemBuilder: (context, index) {
-                  return GetBuilder<OrderDetailController>(
-                    tag: order[index].id.toString(),
-                    key: ValueKey(order[index].id),
-                    init: OrderDetailController(order[index]),
-                    builder: (controller) {
-                      final order =
-                          controller.order.value; // bisa ambil langsung
-                      return ItemOrder(order: order, controller: controller);
-                    },
-                  );
-                },
+              return ScrollConfiguration(
+                behavior: const ScrollBehavior().copyWith(overscroll: false),
+                child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: order.length,
+                  itemBuilder: (context, index) {
+                    final item = order[index];
+
+                    return GetBuilder<OrderDetailController>(
+                      tag: item.id.toString(),
+                      key: ValueKey(item.id),
+                      init: OrderDetailController(item.id),
+                      builder: (controller) {
+                        return ItemOrder(
+                          order: controller.order,
+                          controller: controller,
+                        );
+                      },
+                    );
+                  },
+                ),
               );
             }),
           ),
