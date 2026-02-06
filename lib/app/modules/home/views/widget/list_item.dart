@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:testing_front_end_dev/app/core/helper/helper.dart';
 import 'package:testing_front_end_dev/app/core/theme/theme.dart';
 import 'package:testing_front_end_dev/app/data/models/models.dart';
 import 'package:testing_front_end_dev/app/modules/home/controllers/home_controller.dart';
@@ -46,7 +47,7 @@ class ListItem extends GetView<HomeController> {
               ),
               const SizedBox(height: 8),
               Text(
-                product_item.price.toString(),
+                Helper.formatRupiah(product_item.price.toDouble()),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: GoogleFonts.barlow(fontSize: 16),

@@ -5,6 +5,7 @@ import 'package:testing_front_end_dev/app/core/theme/theme.dart';
 import 'package:testing_front_end_dev/app/modules/home/controllers/home_controller.dart';
 import 'package:testing_front_end_dev/app/modules/home/controllers/order_controller.dart';
 import 'package:testing_front_end_dev/app/modules/home/views/widget/order/count_order.dart';
+import 'package:testing_front_end_dev/app/modules/home/views/widget/order/empty_order.dart';
 import 'package:testing_front_end_dev/app/modules/home/views/widget/order/item.dart';
 
 class OrderData extends GetView<HomeController> {
@@ -74,6 +75,7 @@ class OrderData extends GetView<HomeController> {
           Expanded(
             child: Obx(() {
               final order = controller.order;
+              if (order.isEmpty) return const EmptyOrder();
               return ScrollConfiguration(
                 behavior: const ScrollBehavior().copyWith(overscroll: false),
                 child: ListView.builder(
@@ -99,28 +101,50 @@ class OrderData extends GetView<HomeController> {
             }),
           ),
           CountOrder(),
-          SizedBox(
-            width: double.infinity,
-            height: 48,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: mainColor,
-
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
+          Obx(() {
+            return AnimatedScale(
+              scale: controller.isLoading.value ? 1.0 : 1.0,
+              duration: const Duration(milliseconds: 100),
+              child: SizedBox(
+                width: double.infinity,
+                height: 48,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: mainColor,
+                    disabledBackgroundColor: mainColor.withOpacity(0.6),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  onPressed: controller.isLoading.value
+                      ? null
+                      : () async {
+                          await controller.submit();
+                        },
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 200),
+                    child: controller.isLoading.value
+                        ? SizedBox(
+                            width: 22,
+                            height: 22,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: Colors.white.withOpacity(0.8),
+                            ),
+                          )
+                        : Text(
+                            "Continue to Payment",
+                            style: GoogleFonts.barlow(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white,
+                            ),
+                          ),
+                  ),
                 ),
               ),
-              onPressed: () {},
-              child: Text(
-                'Continue to Payment',
-                style: GoogleFonts.barlow(
-                  fontSize: 16,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-            ),
-          ),
+            );
+          }),
         ],
       ),
     );

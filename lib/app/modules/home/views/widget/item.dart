@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testing_front_end_dev/app/modules/home/controllers/home_controller.dart';
-import 'package:testing_front_end_dev/app/modules/home/views/widget/flip.dart';
+import 'package:testing_front_end_dev/app/modules/home/views/widget/empty_product.dart';
 import 'package:testing_front_end_dev/app/modules/home/views/widget/list_item.dart';
 
 class ProductItem extends GetView<HomeController> {
@@ -16,11 +16,13 @@ class ProductItem extends GetView<HomeController> {
         children: [
           Row(
             children: [
-              Text(
-                "Choso Dishes",
-                style: GoogleFonts.barlow(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
+              Obx(
+                () => Text(
+                  controller.selectedCategory.value?.name ?? 'All Product',
+                  style: GoogleFonts.barlow(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ],
@@ -29,43 +31,59 @@ class ProductItem extends GetView<HomeController> {
           const SizedBox(height: 30),
           Expanded(
             child: Obx(() {
-              final product_item = controller.products;
+              final productItem = controller.products;
+
               if (controller.isLoading.value) {
-                return SizedBox();
+                return const SizedBox();
               }
-              if (product_item.isEmpty) return SizedBox();
-              return ScrollConfiguration(
-                behavior: const ScrollBehavior().copyWith(overscroll: false),
-                child: GridView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  itemCount: product_item.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    mainAxisSpacing: 28,
-                    crossAxisSpacing: 28,
-                    childAspectRatio: 0.85,
-                    crossAxisCount: 3,
+
+              if (productItem.isEmpty) {
+                return const EmptyProduct();
+              }
+
+              return AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                switchInCurve: Curves.easeIn,
+                switchOutCurve: Curves.easeOut,
+                transitionBuilder: (child, animation) {
+                  return FadeTransition(opacity: animation, child: child);
+                },
+                child: ScrollConfiguration(
+                  // 🔑 key penting → trigger animasi saat data berubah
+                  key: ValueKey(productItem.length),
+                  behavior: const ScrollBehavior().copyWith(overscroll: false),
+                  child: GridView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: productItem.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          mainAxisSpacing: 28,
+                          crossAxisSpacing: 28,
+                          childAspectRatio: 0.85,
+                          crossAxisCount: 3,
+                        ),
+                    itemBuilder: (context, index) {
+                      return GetBuilder<HomeController>(
+                        id: 'item_$index',
+                        builder: (_) {
+                          return Listener(
+                            onPointerDown: (_) => controller.press(index),
+                            onPointerUp: (_) {
+                              controller.release(index);
+                              controller.addOrder(productItem[index]);
+                            },
+                            onPointerCancel: (_) => controller.release(index),
+                            child: AnimatedScale(
+                              scale: controller.scaleOf(index),
+                              duration: const Duration(milliseconds: 90),
+                              curve: Curves.easeOut,
+                              child: ListItem(product_item: productItem[index]),
+                            ),
+                          );
+                        },
+                      );
+                    },
                   ),
-                  itemBuilder: (context, index) {
-                    return GetBuilder<HomeController>(
-                      id: 'item_$index',
-                      builder: (_) {
-                        return Listener(
-                          onPointerDown: (_) => controller.press(index),
-                          onPointerUp: (_) {
-                            controller.release(index);
-                            controller.addOrder(product_item[index]);
-                          },
-                          onPointerCancel: (_) => controller.release(index),
-                          child: AnimatedScale(
-                            scale: controller.scaleOf(index),
-                            duration: const Duration(milliseconds: 90),
-                            curve: Curves.easeOut,
-                            child: ListItem(product_item: product_item[index]),
-                          ),
-                        );
-                      },
-                    );
-                  },
                 ),
               );
             }),

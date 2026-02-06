@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:testing_front_end_dev/app/core/helper/helper.dart';
 import 'package:testing_front_end_dev/app/core/theme/theme.dart';
 import 'package:testing_front_end_dev/app/data/models/models.dart';
 import 'package:testing_front_end_dev/app/modules/home/controllers/order_controller.dart';
@@ -41,7 +42,7 @@ class ItemOrder extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      order.price.toString(),
+                      Helper.formatRupiah(order.price.toDouble()),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.barlow(
@@ -118,7 +119,7 @@ class ItemOrder extends StatelessWidget {
                       ),
                     ),
                     Column(
-                      spacing: 10,
+                      spacing: 5,
                       children: [
                         GestureDetector(
                           onTap: () => {
@@ -156,7 +157,7 @@ class ItemOrder extends StatelessWidget {
               ),
               Container(
                 child: Text(
-                  (order.total).toString(),
+                  Helper.formatRupiah(order.total.toDouble()),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.barlow(

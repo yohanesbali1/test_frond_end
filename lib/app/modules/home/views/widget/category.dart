@@ -24,11 +24,15 @@ class CategoryItem extends GetView<HomeController> {
             spacing: 32,
             children: List.generate(dataCategory.length, (index) {
               final item = dataCategory[index];
-              final isActive = controller.selectedIndex.value == index;
+              final isActive = controller.selectedCategory.value?.id == item.id;
 
               return GestureDetector(
-                onTap: () {},
-                child: Container(
+                onTap: () {
+                  controller.selectedCategory.value = item;
+                },
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   decoration: BoxDecoration(
                     border: Border(
@@ -38,13 +42,15 @@ class CategoryItem extends GetView<HomeController> {
                       ),
                     ),
                   ),
-                  child: Text(
-                    item.name,
+                  child: AnimatedDefaultTextStyle(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
                     style: GoogleFonts.barlow(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
                       color: isActive ? mainColor : Colors.white,
                     ),
+                    child: Text(item.name),
                   ),
                 ),
               );

@@ -5,13 +5,13 @@ import 'package:testing_front_end_dev/app/data/providers/category_provider.dart'
 import 'package:testing_front_end_dev/app/data/providers/product_provider.dart';
 
 class HomeController extends GetxController {
-  final selectedIndex = 0.obs;
+  final Rxn<Category> selectedCategory = Rxn<Category>();
   final count = 0.obs;
   final date = DateFormat('dd MMMM yyyy').format(DateTime.now());
   final products = [].obs;
   final category = [].obs;
   final RxList<OrderModel> order = <OrderModel>[].obs;
-  final isLoading = false.obs;
+  final isLoading = true.obs;
   final ProductProvider productProvider = ProductProvider();
   final CategoryProvider categoryProvider = CategoryProvider();
   final Map<int, double> scales = {};
@@ -22,6 +22,8 @@ class HomeController extends GetxController {
     super.onInit();
     getProducts();
     getCategory();
+
+    ever(selectedCategory, (_) => getProducts());
   }
 
   @override
@@ -40,11 +42,15 @@ class HomeController extends GetxController {
 
   Future<void> getProducts() async {
     try {
-      var response = await productProvider.getProducts();
+      isLoading.value = true;
+      var response = await productProvider.getProducts(
+        categoryId: selectedCategory.value?.id ?? null,
+      );
       products.value = response;
-      isLoading.value = false;
     } catch (e) {
       print(e);
+    } finally {
+      isLoading.value = true;
     }
   }
 
@@ -52,9 +58,10 @@ class HomeController extends GetxController {
     try {
       var response = await categoryProvider.getCategory();
       category.value = response;
-      isLoading.value = false;
     } catch (e) {
       print(e);
+    } finally {
+      isLoading.value = true;
     }
   }
 
@@ -87,5 +94,12 @@ class HomeController extends GetxController {
   void release(int index) {
     scales[index] = 1.0;
     update(['item_$index']);
+  }
+
+  Future<void> submit() async {
+    if (isLoading.value) return;
+    isLoading.value = true;
+
+    isLoading.value = false;
   }
 }

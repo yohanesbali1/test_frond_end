@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:testing_front_end_dev/app/core/helper/helper.dart';
 import 'package:testing_front_end_dev/app/core/theme/theme.dart';
 import 'package:testing_front_end_dev/app/modules/home/controllers/home_controller.dart';
 
@@ -56,7 +57,7 @@ class CountOrder extends GetView<HomeController> {
               const Spacer(),
               Obx(
                 () => Text(
-                  controller.subTotal.toString(),
+                  Helper.formatRupiah(controller.subTotal.toDouble()),
                   style: GoogleFonts.barlow(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
