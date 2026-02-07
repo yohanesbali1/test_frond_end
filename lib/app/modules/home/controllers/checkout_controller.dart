@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:testing_front_end_dev/app/core/theme/theme.dart';
+import 'package:testing_front_end_dev/app/core/widgets/custom_alert.widget.dart';
+import 'package:testing_front_end_dev/app/modules/home/controllers/home_controller.dart';
 
 class CheckoutController extends GetxController {
   late TextEditingController cardNameController;
@@ -21,6 +25,8 @@ class CheckoutController extends GetxController {
     {"value": "paypal", "name": "PayPal", "icon": Icons.paypal_outlined},
     {"value": "cash", "name": "Cash", "icon": Icons.wallet_outlined},
   ];
+
+  final home_c = Get.find<HomeController>();
 
   @override
   void onInit() {
@@ -118,17 +124,126 @@ class CheckoutController extends GetxController {
       ].every((v) => v);
     }
     if (!isValid) {
-      Get.snackbar(
-        'Gagal',
-        'Periksa kembali data yang diisi',
-        snackPosition: SnackPosition.BOTTOM,
+      CustomDialog.show(
+        type: DialogType.error,
+        content: Container(
+          width: 400,
+          height: 160,
+          child: Column(
+            children: [
+              Icon(Icons.error_outline_outlined, size: 64, color: Colors.red),
+              const SizedBox(height: 18),
+              Text(
+                "Order Failed",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.barlow(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                  color: mainColor,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                "Check your input data",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.barlow(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: secondaryTextColor,
+                ),
+              ),
+            ],
+          ),
+        ),
       );
+      await Future.delayed(Duration(seconds: 2));
+      Get.back();
       return;
     }
-    Get.snackbar(
-      'Sukses',
-      'Data berhasil dikirim',
-      snackPosition: SnackPosition.BOTTOM,
-    );
+
+    CustomDialog.show(type: DialogType.loading, title: "Mengirim data...");
+
+    try {
+      await Future.delayed(Duration(seconds: 2));
+      if (Get.isDialogOpen ?? false) Get.back();
+      CustomDialog.show(
+        type: DialogType.success,
+        content: Container(
+          height: 240,
+          width: 400,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Column(
+                children: [
+                  Text(
+                    "Order Success",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.barlow(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w600,
+                      color: mainColor,
+                    ),
+                  ),
+                ],
+              ),
+
+              Positioned(
+                top: -70, // bebas mau minus juga
+                left: 0,
+                right: 0,
+                child: Image.asset(
+                  'assets/images/burger.gif',
+                  height: 400,
+                  width: 400,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+      await Future.delayed(Duration(seconds: 2));
+      while (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
+
+      home_c.order.clear();
+    } catch (e) {
+      CustomDialog.show(
+        type: DialogType.error,
+        content: Container(
+          width: 400,
+          height: 160,
+          child: Column(
+            children: [
+              Icon(Icons.error_outline_outlined, size: 64, color: Colors.red),
+              const SizedBox(height: 18),
+              Text(
+                "Order Failed",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.barlow(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                  color: mainColor,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                "Please try again",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.barlow(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: secondaryTextColor,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+      await Future.delayed(Duration(seconds: 2));
+      if (Get.isDialogOpen ?? false) Get.back();
+    }
   }
 }

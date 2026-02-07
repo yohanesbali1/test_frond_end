@@ -116,7 +116,7 @@ class OrderData extends GetView<HomeController> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  onPressed: controller.isLoading.value
+                  onPressed: controller.order.isEmpty
                       ? null
                       : () async {
                           await controller.submit();
