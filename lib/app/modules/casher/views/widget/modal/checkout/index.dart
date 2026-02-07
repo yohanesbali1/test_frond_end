@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testing_front_end_dev/app/core/theme/theme.dart';
-import 'package:testing_front_end_dev/app/modules/home/controllers/checkout_controller.dart';
-import 'package:testing_front_end_dev/app/modules/home/views/widget/modal/checkout/order.dart';
-import 'package:testing_front_end_dev/app/modules/home/views/widget/modal/checkout/payment.dart';
+import 'package:testing_front_end_dev/app/modules/casher/controllers/checkout_controller.dart';
+import 'package:testing_front_end_dev/app/modules/casher/views/widget/modal/checkout/order.dart';
+import 'package:testing_front_end_dev/app/modules/casher/views/widget/modal/checkout/payment.dart';
 
 class CustomRightModal extends GetView<CheckoutController> {
   final double width;

@@ -1,8 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:testing_front_end_dev/app/modules/home/controllers/flip_controller.dart';
-import 'package:testing_front_end_dev/app/modules/home/views/widget/list_item.dart';
+import 'package:testing_front_end_dev/app/modules/casher/controllers/flip_controller.dart';
+import 'package:testing_front_end_dev/app/modules/casher/views/widget/list_item.dart';
 
 class FlipItemWidget extends StatelessWidget {
   final dynamic productItem;

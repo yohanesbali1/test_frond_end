@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testing_front_end_dev/app/core/theme/theme.dart';
 import 'package:testing_front_end_dev/app/core/widgets/custom_alert.widget.dart';
-import 'package:testing_front_end_dev/app/modules/home/controllers/home_controller.dart';
+import 'package:testing_front_end_dev/app/modules/casher/controllers/casher_controller.dart';
 
 class CheckoutController extends GetxController {
   late TextEditingController cardNameController;
@@ -26,7 +26,7 @@ class CheckoutController extends GetxController {
     {"value": "cash", "name": "Cash", "icon": Icons.wallet_outlined},
   ];
 
-  final home_c = Get.find<HomeController>();
+  final casher_c = Get.find<CasherController>();
 
   @override
   void onInit() {
@@ -208,7 +208,7 @@ class CheckoutController extends GetxController {
         Get.back();
       }
 
-      home_c.order.clear();
+      casher_c.order.clear();
     } catch (e) {
       CustomDialog.show(
         type: DialogType.error,

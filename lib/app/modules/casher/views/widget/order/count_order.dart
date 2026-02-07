@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testing_front_end_dev/app/core/helper/helper.dart';
 import 'package:testing_front_end_dev/app/core/theme/theme.dart';
-import 'package:testing_front_end_dev/app/modules/home/controllers/home_controller.dart';
+import 'package:testing_front_end_dev/app/modules/casher/controllers/casher_controller.dart';
 
-class CountOrder extends GetView<HomeController> {
+class CountOrder extends GetView<CasherController> {
   const CountOrder({super.key});
 
   @override

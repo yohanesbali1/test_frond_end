@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testing_front_end_dev/app/data/models/models.dart';
-import 'package:testing_front_end_dev/app/modules/home/controllers/home_controller.dart';
+import 'package:testing_front_end_dev/app/modules/casher/controllers/casher_controller.dart';
 
 class OrderDetailController extends GetxController {
-  final HomeController home = Get.find();
+  final CasherController casher_c = Get.find();
 
   final int? orderId;
 
@@ -15,7 +15,7 @@ class OrderDetailController extends GetxController {
 
   OrderDetailController(this.orderId);
 
-  OrderModel get order => home.order.firstWhere((e) => e.id == orderId);
+  OrderModel get order => casher_c.order.firstWhere((e) => e.id == orderId);
 
   @override
   void onInit() {
@@ -23,8 +23,8 @@ class OrderDetailController extends GetxController {
     qtyController = TextEditingController(text: order.qty.toString());
     noteController = TextEditingController(text: order.note ?? '');
 
-    orderWorker = ever<List<OrderModel>>(home.order, (_) {
-      final current = home.order.firstWhereOrNull((e) => e.id == orderId);
+    orderWorker = ever<List<OrderModel>>(casher_c.order, (_) {
+      final current = casher_c.order.firstWhereOrNull((e) => e.id == orderId);
 
       if (current == null) return;
 
@@ -41,26 +41,26 @@ class OrderDetailController extends GetxController {
   void updateQty(int qty) {
     if (qty < 1) qty = 1;
 
-    final index = home.order.indexWhere((e) => e.id == orderId);
+    final index = casher_c.order.indexWhere((e) => e.id == orderId);
     if (index == -1) return;
 
-    home.order[index] = home.order[index].copyWith(qty: qty);
+    casher_c.order[index] = casher_c.order[index].copyWith(qty: qty);
 
-    home.order.refresh();
+    casher_c.order.refresh();
   }
 
   void updateNote(String note) {
-    final index = home.order.indexWhere((e) => e.id == orderId);
+    final index = casher_c.order.indexWhere((e) => e.id == orderId);
     if (index == -1) return;
 
-    home.order[index] = home.order[index].copyWith(note: note);
+    casher_c.order[index] = casher_c.order[index].copyWith(note: note);
 
-    home.order.refresh();
+    casher_c.order.refresh();
   }
 
   void removeItem() {
-    home.order.removeWhere((e) => e.id == orderId);
-    home.order.refresh();
+    casher_c.order.removeWhere((e) => e.id == orderId);
+    casher_c.order.refresh();
   }
 
   @override

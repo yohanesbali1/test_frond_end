@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testing_front_end_dev/app/core/theme/theme.dart';
 import 'package:testing_front_end_dev/app/core/widgets/text_form.widget.dart';
-import 'package:testing_front_end_dev/app/modules/home/controllers/checkout_controller.dart';
+import 'package:testing_front_end_dev/app/modules/casher/controllers/checkout_controller.dart';
 
 class CreditCart extends GetView<CheckoutController> {
   const CreditCart({super.key});

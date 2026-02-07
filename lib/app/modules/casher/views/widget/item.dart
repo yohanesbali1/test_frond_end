@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:testing_front_end_dev/app/modules/home/controllers/home_controller.dart';
-import 'package:testing_front_end_dev/app/modules/home/views/widget/empty_product.dart';
-import 'package:testing_front_end_dev/app/modules/home/views/widget/list_item.dart';
-import 'package:testing_front_end_dev/app/modules/home/views/widget/list_item_skeleton.dart';
+import 'package:testing_front_end_dev/app/modules/casher/controllers/casher_controller.dart';
+import 'package:testing_front_end_dev/app/modules/casher/views/widget/empty_product.dart';
+import 'package:testing_front_end_dev/app/modules/casher/views/widget/list_item.dart';
+import 'package:testing_front_end_dev/app/modules/casher/views/widget/list_item_skeleton.dart';
 
-class ProductItem extends GetView<HomeController> {
+class ProductItem extends GetView<CasherController> {
   const ProductItem({super.key});
 
   @override
@@ -62,7 +62,6 @@ class ProductItem extends GetView<HomeController> {
                   return FadeTransition(opacity: animation, child: child);
                 },
                 child: ScrollConfiguration(
-                  // 🔑 key penting → trigger animasi saat data berubah
                   key: ValueKey(productItem.length),
                   behavior: const ScrollBehavior().copyWith(overscroll: false),
                   child: GridView.builder(
@@ -76,7 +75,7 @@ class ProductItem extends GetView<HomeController> {
                           crossAxisCount: 3,
                         ),
                     itemBuilder: (context, index) {
-                      return GetBuilder<HomeController>(
+                      return GetBuilder<CasherController>(
                         id: 'item_$index',
                         builder: (_) {
                           return Listener(

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testing_front_end_dev/app/core/theme/theme.dart';
-import 'package:testing_front_end_dev/app/modules/home/controllers/home_controller.dart';
-import 'package:testing_front_end_dev/app/modules/home/controllers/order_controller.dart';
-import 'package:testing_front_end_dev/app/modules/home/views/widget/empty_order.dart';
-import 'package:testing_front_end_dev/app/modules/home/views/widget/order/count_order.dart';
-import 'package:testing_front_end_dev/app/modules/home/views/widget/order/item.dart';
+import 'package:testing_front_end_dev/app/modules/casher/controllers/casher_controller.dart';
+import 'package:testing_front_end_dev/app/modules/casher/controllers/order_controller.dart';
+import 'package:testing_front_end_dev/app/modules/casher/views/widget/empty_order.dart';
+import 'package:testing_front_end_dev/app/modules/casher/views/widget/order/count_order.dart';
+import 'package:testing_front_end_dev/app/modules/casher/views/widget/order/item.dart';
 
-class OrderModal extends GetView<HomeController> {
+class OrderModal extends GetView<CasherController> {
   const OrderModal({super.key});
 
   @override

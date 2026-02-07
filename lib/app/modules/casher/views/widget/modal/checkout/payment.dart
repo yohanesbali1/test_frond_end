@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testing_front_end_dev/app/core/theme/theme.dart';
-import 'package:testing_front_end_dev/app/modules/home/controllers/checkout_controller.dart';
-import 'package:testing_front_end_dev/app/modules/home/views/widget/modal/checkout/form_checkout.dart';
+import 'package:testing_front_end_dev/app/modules/casher/controllers/checkout_controller.dart';
+import 'package:testing_front_end_dev/app/modules/casher/views/widget/modal/checkout/form_checkout.dart';
 
 class PeymentModal extends GetView<CheckoutController> {
   const PeymentModal({super.key});
@@ -113,7 +113,7 @@ class PeymentModal extends GetView<CheckoutController> {
                         ),
                         onPressed:
                             controller.isLoading.value ||
-                                controller.home_c.order.isEmpty
+                                controller.casher_c.order.isEmpty
                             ? null
                             : () async {
                                 await controller.submit();

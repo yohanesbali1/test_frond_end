@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testing_front_end_dev/app/core/helper/helper.dart';
 import 'package:testing_front_end_dev/app/core/theme/theme.dart';
 import 'package:testing_front_end_dev/app/data/models/models.dart';
-import 'package:testing_front_end_dev/app/modules/home/controllers/home_controller.dart';
 
-class ListItem extends GetView<HomeController> {
+class ListItem extends StatelessWidget {
   final Product product_item;
   const ListItem({required this.product_item});
 
@@ -19,7 +17,7 @@ class ListItem extends GetView<HomeController> {
         Container(
           width: double.infinity,
           height: 262,
-          margin: const EdgeInsets.only(top: 80), // ruang untuk avatar
+          margin: const EdgeInsets.only(top: 80),
           decoration: BoxDecoration(
             color: bgsecondColor,
             borderRadius: BorderRadius.circular(12),

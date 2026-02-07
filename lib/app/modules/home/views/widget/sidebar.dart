@@ -27,27 +27,33 @@ class SideBar extends GetView<HomeController> {
             child: Column(
               spacing: 20,
               children: [
-                Container(
-                  padding: const EdgeInsets.all(17),
-                  decoration: BoxDecoration(
-                    color: mainColor,
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  child: Icon(
-                    Icons.home_outlined,
-                    size: 32,
-                    color: Colors.white,
+                GestureDetector(
+                  onTap: () => controller.change_page(0),
+                  child: Container(
+                    padding: const EdgeInsets.all(17),
+                    decoration: BoxDecoration(
+                      color: mainColor,
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                    ),
+                    child: Icon(
+                      Icons.home_outlined,
+                      size: 32,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
-                Container(
-                  padding: const EdgeInsets.all(17),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                  ),
-                  child: Icon(
-                    Icons.dashboard_outlined,
-                    size: 32,
-                    color: mainColor,
+                GestureDetector(
+                  onTap: () => controller.change_page(1),
+                  child: Container(
+                    padding: const EdgeInsets.all(17),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                    ),
+                    child: Icon(
+                      Icons.dashboard_outlined,
+                      size: 32,
+                      color: mainColor,
+                    ),
                   ),
                 ),
               ],
