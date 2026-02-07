@@ -7,6 +7,6 @@ class HomeBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<HomeController>(() => HomeController());
-    Get.lazyPut<CheckoutController>(() => CheckoutController());
+    Get.lazyPut<CheckoutController>(() => CheckoutController(), fenix: true);
   }
 }

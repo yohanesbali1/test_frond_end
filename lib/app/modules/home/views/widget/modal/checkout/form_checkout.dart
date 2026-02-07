@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:testing_front_end_dev/app/core/widgets/text_form.widget.dart';
+import 'package:testing_front_end_dev/app/modules/home/controllers/checkout_controller.dart';
 import 'package:testing_front_end_dev/app/modules/home/views/widget/modal/checkout/credit_cart.dart';
 
-class FormCheckout extends StatelessWidget {
+class FormCheckout extends GetView<CheckoutController> {
   const FormCheckout({super.key});
 
   @override

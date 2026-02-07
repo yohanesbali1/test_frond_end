@@ -77,6 +77,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
                   item,
                   style: GoogleFonts.barlow(
                     fontSize: 14,
+                    color: Colors.white,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -86,6 +87,18 @@ class _CustomInputFieldState extends State<CustomInputField> {
         onChanged: (val) {
           if (val != null) widget.onChanged?.call(val);
         },
+        style: GoogleFonts.barlow(
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+          color: Colors.white,
+        ),
+        hint: Text(
+          widget.hintText,
+          style: TextStyle(
+            color: secondaryTextColor, // warna hint
+            fontSize: 14,
+          ),
+        ),
         dropdownColor: bgsecondColor,
         decoration: _buildDecoration(),
       );

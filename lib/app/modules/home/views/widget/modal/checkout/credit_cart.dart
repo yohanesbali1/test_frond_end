@@ -55,7 +55,7 @@ class CreditCart extends GetView<CheckoutController> {
                   ),
                 ),
                 CustomInputField(
-                  controller: controller.cardNameController,
+                  controller: controller.cardNumberController,
                   hintText: '123456789',
                   keyboardType: TextInputType.number,
                   onChanged: (val) => {},
@@ -145,7 +145,7 @@ class CreditCart extends GetView<CheckoutController> {
                           isDropdown: true,
                           value: controller.orderTypeController,
                           dropdownItems: ['dine in', 'take away', 'delivery'],
-                          hintText: 'Select option',
+                          hintText: 'Select Type',
                           onChanged: (val) => {
                             // setState(() => selectedValue = val),
                           },
