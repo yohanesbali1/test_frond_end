@@ -9,11 +9,18 @@ class CustomInputField extends StatefulWidget {
   final String hintText;
   final TextInputType keyboardType;
   final Function(String)? onChanged;
+
+  // Dropdown
   final bool isDropdown;
   final List<String>? dropdownItems;
   final String? value;
+
+  // Password & Date
   final bool isPassword;
-  final bool isDate; // baru untuk date picker
+  final bool isDate;
+
+  // External validation
+  final String? errorText;
 
   const CustomInputField({
     Key? key,
@@ -27,6 +34,7 @@ class CustomInputField extends StatefulWidget {
     this.value,
     this.isPassword = false,
     this.isDate = false,
+    this.errorText,
   }) : super(key: key);
 
   @override
@@ -34,7 +42,7 @@ class CustomInputField extends StatefulWidget {
 }
 
 class _CustomInputFieldState extends State<CustomInputField> {
-  bool _obscureText = true;
+  late bool _obscureText;
 
   @override
   void initState() {
@@ -44,6 +52,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
 
   Future<void> _pickDate() async {
     DateTime initialDate = DateTime.now();
+
     if (widget.controller?.text.isNotEmpty ?? false) {
       try {
         initialDate = DateFormat('yyyy-MM-dd').parse(widget.controller!.text);
@@ -58,7 +67,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
     );
 
     if (picked != null) {
-      String formatted = DateFormat('yyyy-MM-dd').format(picked);
+      final formatted = DateFormat('yyyy-MM-dd').format(picked);
       widget.controller?.text = formatted;
       widget.onChanged?.call(formatted);
     }
@@ -71,15 +80,11 @@ class _CustomInputFieldState extends State<CustomInputField> {
         value: widget.value,
         items: widget.dropdownItems
             ?.map(
-              (item) => DropdownMenuItem(
+              (item) => DropdownMenuItem<String>(
                 value: item,
                 child: Text(
                   item,
-                  style: GoogleFonts.barlow(
-                    fontSize: 14,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                  ),
+                  style: GoogleFonts.barlow(fontSize: 14, color: Colors.white),
                 ),
               ),
             )
@@ -87,16 +92,12 @@ class _CustomInputFieldState extends State<CustomInputField> {
         onChanged: (val) {
           if (val != null) widget.onChanged?.call(val);
         },
-        style: GoogleFonts.barlow(
-          fontSize: 14,
-          fontWeight: FontWeight.w400,
-          color: Colors.white,
-        ),
         hint: Text(
           widget.hintText,
-          style: TextStyle(
-            color: secondaryTextColor, // warna hint
+          style: GoogleFonts.barlow(
             fontSize: 14,
+            fontWeight: FontWeight.w400,
+            color: secondaryTextColor,
           ),
         ),
         dropdownColor: bgsecondColor,
@@ -107,10 +108,11 @@ class _CustomInputFieldState extends State<CustomInputField> {
     return TextField(
       controller: widget.controller,
       enabled: widget.isEditable,
-      readOnly: widget.isDate, // kalau date, readOnly true
-      onChanged: widget.isDate ? null : (val) => widget.onChanged?.call(val),
+      readOnly: widget.isDate,
       keyboardType: widget.keyboardType,
       obscureText: _obscureText,
+      onTap: widget.isDate ? _pickDate : null,
+      onChanged: widget.onChanged,
       style: GoogleFonts.barlow(fontSize: 14, fontWeight: FontWeight.w400),
       decoration: _buildDecoration(
         suffixIcon: widget.isPassword
@@ -125,23 +127,23 @@ class _CustomInputFieldState extends State<CustomInputField> {
                 },
               )
             : widget.isDate
-            ? Icon(Icons.calendar_today)
+            ? const Icon(Icons.calendar_today)
             : null,
       ),
-      onTap: widget.isDate ? _pickDate : null,
     );
   }
 
   InputDecoration _buildDecoration({Widget? suffixIcon}) {
     return InputDecoration(
       hintText: widget.hintText,
+      errorText: widget.errorText, // 🔥 KUNCI EXTERNAL VALIDATION
       hintStyle: GoogleFonts.barlow(
         fontSize: 14,
         fontWeight: FontWeight.w400,
         color: secondaryTextColor,
       ),
       isDense: true,
-      contentPadding: EdgeInsets.symmetric(vertical: 14, horizontal: 14),
+      contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
       fillColor: bgInput,
       filled: true,
       border: OutlineInputBorder(
@@ -155,6 +157,14 @@ class _CustomInputFieldState extends State<CustomInputField> {
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
         borderSide: BorderSide(color: mainColor, width: 2),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: const BorderSide(color: Colors.red, width: 1),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: const BorderSide(color: Colors.red, width: 2),
       ),
       suffixIcon: suffixIcon,
     );

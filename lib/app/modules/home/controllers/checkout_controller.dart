@@ -3,12 +3,24 @@ import 'package:get/get.dart';
 
 class CheckoutController extends GetxController {
   late TextEditingController cardNameController;
+  final Rxn<String> cardnameError = Rxn<String>();
   late TextEditingController cardNumberController;
+  final Rxn<String> cardnumberError = Rxn<String>();
   late TextEditingController cardExpController;
+  final Rxn<String> cardexpError = Rxn<String>();
   late TextEditingController cardCVVController;
-  String? orderTypeController;
-  Rx<bool> isLoading = false.obs;
+  final Rxn<String> cardcvvError = Rxn<String>();
+  final Rxn<String> orderTypeController = Rxn<String>();
+  final Rxn<String> ordertypeError = Rxn<String>();
   late TextEditingController tableController;
+  final Rxn<String> tableError = Rxn<String>();
+  Rx<bool> isLoading = false.obs;
+  Rx<String> paymentType = "credit".obs;
+  final List<Map<String, dynamic>> optionPayment = [
+    {"value": "credit", "name": "Credit Card", "icon": Icons.credit_card},
+    {"value": "paypal", "name": "PayPal", "icon": Icons.paypal_outlined},
+    {"value": "cash", "name": "Cash", "icon": Icons.wallet_outlined},
+  ];
 
   @override
   void onInit() {
@@ -17,9 +29,106 @@ class CheckoutController extends GetxController {
     cardNumberController = TextEditingController();
     cardExpController = TextEditingController();
     cardCVVController = TextEditingController();
-    orderTypeController = null;
     tableController = TextEditingController();
   }
 
-  Future<void> submit() async {}
+  bool validateCardName() {
+    final val = cardNameController.text.trim();
+    if (val.isEmpty) {
+      cardnameError.value = 'Name card is required';
+      return false;
+    }
+    cardnameError.value = null;
+    return true;
+  }
+
+  bool validateCardNumber() {
+    final val = cardNumberController.text.trim();
+    if (val.isEmpty) {
+      cardnumberError.value = 'number card is required';
+      return false;
+    }
+    if (!RegExp(r'^\d+$').hasMatch(val)) {
+      cardnumberError.value = 'number card must be a number';
+      return false;
+    }
+    cardnumberError.value = null;
+    return true;
+  }
+
+  bool validateCardExp() {
+    final val = cardExpController.text.trim();
+    if (val.isEmpty) {
+      cardexpError.value = 'expiration date is required';
+      return false;
+    }
+    try {
+      DateTime.parse(val);
+      cardexpError.value = null;
+      return true;
+    } catch (_) {
+      cardexpError.value = 'date format must be yyyy-mm-dd';
+      return false;
+    }
+  }
+
+  bool validateCVV() {
+    final val = cardCVVController.text.trim();
+    if (!RegExp(r'^\d{3,4}$').hasMatch(val)) {
+      cardcvvError.value = 'CVV must be 3-4 digits';
+      return false;
+    }
+    cardcvvError.value = null;
+    return true;
+  }
+
+  bool validateOrderType() {
+    if (orderTypeController.value == null) {
+      ordertypeError.value = 'Order must be selected';
+      return false;
+    }
+    ordertypeError.value = null;
+    return true;
+  }
+
+  bool validateTable() {
+    final val = tableController.text.trim();
+    if (val.isEmpty) {
+      tableError.value = 'Table no is required';
+      return false;
+    }
+    if (!RegExp(r'^\d+$').hasMatch(val)) {
+      tableError.value = 'Table no must be a number';
+      return false;
+    }
+    tableError.value = null;
+    return true;
+  }
+
+  Future<void> submit() async {
+    bool isValid = true;
+    if (paymentType.value == "credit") {
+      isValid = [
+        validateCardName(),
+        validateCardNumber(),
+        validateCardExp(),
+        validateCVV(),
+        validateOrderType(),
+        validateTable(),
+      ].every((v) => v);
+    }
+    if (!isValid) {
+      Get.snackbar(
+        'Gagal',
+        'Periksa kembali data yang diisi',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      return;
+    }
+    Get.snackbar(
+      'Sukses',
+      'Data berhasil dikirim',
+      snackPosition: SnackPosition.BOTTOM,
+    );
+  }
 }

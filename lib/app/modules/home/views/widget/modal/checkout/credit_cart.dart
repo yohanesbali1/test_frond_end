@@ -30,11 +30,14 @@ class CreditCart extends GetView<CheckoutController> {
                     color: Colors.white,
                   ),
                 ),
-                CustomInputField(
-                  controller: controller.cardNameController,
-                  hintText: 'Ardi Nugroho',
-                  keyboardType: TextInputType.text,
-                  onChanged: (val) => {},
+                Obx(
+                  () => CustomInputField(
+                    controller: controller.cardNameController,
+                    hintText: 'Ardi Nugroho',
+                    errorText: controller.cardnameError.value,
+                    keyboardType: TextInputType.text,
+                    onChanged: (_) => controller.validateCardName(),
+                  ),
                 ),
               ],
             ),
@@ -54,11 +57,14 @@ class CreditCart extends GetView<CheckoutController> {
                     color: Colors.white,
                   ),
                 ),
-                CustomInputField(
-                  controller: controller.cardNumberController,
-                  hintText: '123456789',
-                  keyboardType: TextInputType.number,
-                  onChanged: (val) => {},
+                Obx(
+                  () => CustomInputField(
+                    controller: controller.cardNumberController,
+                    hintText: '123456789',
+                    errorText: controller.cardnumberError.value,
+                    keyboardType: TextInputType.number,
+                    onChanged: (_) => controller.validateCardNumber(),
+                  ),
                 ),
               ],
             ),
@@ -82,11 +88,14 @@ class CreditCart extends GetView<CheckoutController> {
                             color: Colors.white,
                           ),
                         ),
-                        CustomInputField(
-                          controller: controller.cardExpController,
-                          hintText: 'Select date',
-                          isDate: true,
-                          onChanged: (val) => print('Date: $val'),
+                        Obx(
+                          () => CustomInputField(
+                            controller: controller.cardExpController,
+                            hintText: 'Select date',
+                            errorText: controller.cardexpError.value,
+                            isDate: true,
+                            onChanged: (_) => controller.validateCardNumber(),
+                          ),
                         ),
                       ],
                     ),
@@ -107,11 +116,14 @@ class CreditCart extends GetView<CheckoutController> {
                             color: Colors.white,
                           ),
                         ),
-                        CustomInputField(
-                          controller: controller.cardCVVController,
-                          hintText: '1234',
-                          isPassword: true,
-                          onChanged: (val) => print('Password: $val'),
+                        Obx(
+                          () => CustomInputField(
+                            controller: controller.cardCVVController,
+                            hintText: 'CVV',
+                            isPassword: true,
+                            errorText: controller.cardcvvError.value,
+                            onChanged: (_) => controller.validateCVV(),
+                          ),
                         ),
                       ],
                     ),
@@ -141,14 +153,18 @@ class CreditCart extends GetView<CheckoutController> {
                             color: Colors.white,
                           ),
                         ),
-                        CustomInputField(
-                          isDropdown: true,
-                          value: controller.orderTypeController,
-                          dropdownItems: ['dine in', 'take away', 'delivery'],
-                          hintText: 'Select Type',
-                          onChanged: (val) => {
-                            // setState(() => selectedValue = val),
-                          },
+                        Obx(
+                          () => CustomInputField(
+                            isDropdown: true,
+                            value: controller.orderTypeController.value,
+                            dropdownItems: ['dine in', 'take away', 'delivery'],
+                            hintText: 'Select Type',
+                            errorText: controller.ordertypeError.value,
+                            onChanged: (value) {
+                              controller.orderTypeController.value = value;
+                              return controller.validateOrderType();
+                            },
+                          ),
                         ),
                       ],
                     ),
@@ -169,11 +185,14 @@ class CreditCart extends GetView<CheckoutController> {
                             color: Colors.white,
                           ),
                         ),
-                        CustomInputField(
-                          controller: controller.tableController,
-                          hintText: '001',
-                          keyboardType: TextInputType.number,
-                          onChanged: (val) => {},
+                        Obx(
+                          () => CustomInputField(
+                            controller: controller.tableController,
+                            hintText: '001',
+                            errorText: controller.tableError.value,
+                            keyboardType: TextInputType.number,
+                            onChanged: (_) => controller.validateTable(),
+                          ),
                         ),
                       ],
                     ),

@@ -13,6 +13,7 @@ void main() {
       title: "Application",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,
+      themeMode: ThemeMode.dark,
       theme: ThemeData(
         primaryColor: Colors.white,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),

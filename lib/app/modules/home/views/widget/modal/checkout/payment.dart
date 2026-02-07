@@ -47,8 +47,8 @@ class PeymentModal extends GetView<CheckoutController> {
             ),
           ),
           Expanded(
-            child: ScrollConfiguration(
-              behavior: const ScrollBehavior().copyWith(overscroll: false),
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
               child: FormCheckout(),
             ),
           ),
@@ -74,7 +74,7 @@ class PeymentModal extends GetView<CheckoutController> {
                         onPressed: controller.isLoading.value
                             ? null
                             : () async {
-                                await controller.submit();
+                                Get.back();
                               },
                         child: AnimatedSwitcher(
                           duration: const Duration(milliseconds: 200),

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testing_front_end_dev/app/modules/home/controllers/checkout_controller.dart';
 import 'package:testing_front_end_dev/app/modules/home/views/widget/modal/checkout/credit_cart.dart';
+import 'package:testing_front_end_dev/app/modules/home/views/widget/modal/checkout/option_payment.dart';
 
 class FormCheckout extends GetView<CheckoutController> {
   const FormCheckout({super.key});
@@ -29,10 +30,15 @@ class FormCheckout extends GetView<CheckoutController> {
                     color: Colors.white,
                   ),
                 ),
+                OptionPayment(),
               ],
             ),
           ),
-          CreditCart(),
+          Obx(() {
+            final paymentSelected = controller.paymentType;
+            if (paymentSelected.value == 'credit') return CreditCart();
+            return Container();
+          }),
         ],
       ),
     );
