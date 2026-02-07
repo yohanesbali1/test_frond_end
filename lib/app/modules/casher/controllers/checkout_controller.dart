@@ -203,7 +203,7 @@ class CheckoutController extends GetxController {
           ),
         ),
       );
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(Duration(seconds: 8));
       while (Get.isDialogOpen ?? false) {
         Get.back();
       }
