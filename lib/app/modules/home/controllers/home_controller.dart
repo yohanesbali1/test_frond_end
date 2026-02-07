@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:testing_front_end_dev/app/data/models/models.dart';
 import 'package:testing_front_end_dev/app/data/providers/category_provider.dart';
 import 'package:testing_front_end_dev/app/data/providers/product_provider.dart';
+import 'package:testing_front_end_dev/app/modules/home/views/widget/modal/checkout/index.dart';
 
 class HomeController extends GetxController {
   final Rxn<Category> selectedCategory = Rxn<Category>();
@@ -99,7 +101,24 @@ class HomeController extends GetxController {
   Future<void> submit() async {
     if (isLoading.value) return;
     isLoading.value = true;
-
+    Get.generalDialog(
+      barrierDismissible: true,
+      barrierColor: Colors.black26,
+      barrierLabel: 'Dismiss',
+      transitionDuration: Duration(milliseconds: 300),
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return CustomRightModal();
+      },
+      transitionBuilder: (context, animation, secondaryAnimation, child) {
+        return SlideTransition(
+          position: Tween<Offset>(
+            begin: Offset(1, 0), // mulai dari kanan
+            end: Offset(0, 0), // ke posisi normal
+          ).animate(animation),
+          child: child,
+        );
+      },
+    );
     isLoading.value = false;
   }
 }

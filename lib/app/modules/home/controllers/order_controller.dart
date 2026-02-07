@@ -61,7 +61,6 @@ class OrderDetailController extends GetxController {
   void removeItem() {
     home.order.removeWhere((e) => e.id == orderId);
     home.order.refresh();
-    Get.back();
   }
 
   @override

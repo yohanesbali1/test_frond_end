@@ -9,8 +9,13 @@ import 'package:testing_front_end_dev/app/modules/home/controllers/order_control
 class ItemOrder extends StatelessWidget {
   final OrderDetailController controller;
   final OrderModel order;
-  const ItemOrder({Key? key, required this.controller, required this.order})
-    : super(key: key);
+  final bool isEditable;
+  const ItemOrder({
+    Key? key,
+    required this.controller,
+    required this.order,
+    this.isEditable = true,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -118,40 +123,41 @@ class ItemOrder extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Column(
-                      spacing: 5,
-                      children: [
-                        GestureDetector(
-                          onTap: () => {
-                            controller.qtyController.text = (order.qty + 1)
-                                .toString(),
-                            controller.updateQty(order.qty + 1),
-                          },
-                          child: Container(
-                            child: Icon(
-                              Icons.arrow_circle_up,
-                              color: mainColor,
+                    if (isEditable)
+                      Column(
+                        spacing: 5,
+                        children: [
+                          GestureDetector(
+                            onTap: () => {
+                              controller.qtyController.text = (order.qty + 1)
+                                  .toString(),
+                              controller.updateQty(order.qty + 1),
+                            },
+                            child: Container(
+                              child: Icon(
+                                Icons.arrow_circle_up,
+                                color: mainColor,
+                              ),
                             ),
                           ),
-                        ),
-                        GestureDetector(
-                          onTap: () => {
-                            if (order.qty > 1)
-                              {
-                                controller.qtyController.text = (order.qty - 1)
-                                    .toString(),
-                                controller.updateQty(order.qty - 1),
-                              },
-                          },
-                          child: Container(
-                            child: Icon(
-                              Icons.arrow_circle_down,
-                              color: mainColor,
+                          GestureDetector(
+                            onTap: () => {
+                              if (order.qty > 1)
+                                {
+                                  controller.qtyController.text =
+                                      (order.qty - 1).toString(),
+                                  controller.updateQty(order.qty - 1),
+                                },
+                            },
+                            child: Container(
+                              child: Icon(
+                                Icons.arrow_circle_down,
+                                color: mainColor,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
                   ],
                 ),
               ),
@@ -174,7 +180,7 @@ class ItemOrder extends StatelessWidget {
               Expanded(
                 child: TextField(
                   controller: controller.noteController,
-
+                  enabled: isEditable,
                   onChanged: (val) {
                     controller.updateNote(val);
                   },
