@@ -20,7 +20,13 @@ class HomeView extends GetView<HomeController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              decoration: BoxDecoration(color: bgsecondColor),
+              decoration: BoxDecoration(
+                color: bgsecondColor,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(24),
+                  bottomRight: Radius.circular(24),
+                ),
+              ),
               width: 104,
               child: SideBar(),
             ),
