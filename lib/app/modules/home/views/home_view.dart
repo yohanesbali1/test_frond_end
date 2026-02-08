@@ -28,7 +28,7 @@ class HomeView extends GetView<HomeController> {
               child: PageView(
                 controller: controller.pageController,
                 onPageChanged: (index) {
-                  controller.change_page(index);
+                  controller.changePage(index);
                 },
                 children: [CasherView(), DashboardView()],
               ),
