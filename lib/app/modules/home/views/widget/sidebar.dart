@@ -9,17 +9,23 @@ class SideBar extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 24),
       child: Column(
         children: [
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(12)),
-              color: bgBrown,
+          Padding(
+            padding: EdgeInsets.all(24),
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(12)),
+                color: bgBrown,
+              ),
+              child: Icon(
+                Icons.storefront_outlined,
+                size: 40,
+                color: mainColor,
+              ),
             ),
-            child: Icon(Icons.storefront_outlined, size: 40, color: mainColor),
           ),
           SizedBox(height: 24),
           Obx(
@@ -27,54 +33,32 @@ class SideBar extends GetView<HomeController> {
               width: double.infinity,
               child: Column(
                 spacing: 20,
-                children: [
-                  GestureDetector(
+                children: List.generate(controller.ListMenu.length, (index) {
+                  final item = controller.ListMenu[index];
+                  return GestureDetector(
                     onTap: () {
-                      controller.change_page(0);
+                      controller.change_page(item['page_index']);
                     },
                     child: AnimatedContainer(
                       duration: Duration(milliseconds: 300),
                       curve: Curves.easeInOut,
                       padding: const EdgeInsets.all(17),
                       decoration: BoxDecoration(
-                        color: controller.page_index == 0
+                        color: controller.page_index == item['page_index']
                             ? mainColor
                             : Colors.transparent,
                         borderRadius: BorderRadius.all(Radius.circular(12)),
                       ),
                       child: Icon(
-                        Icons.home_outlined,
+                        item['icon'],
                         size: 32,
-                        color: controller.page_index == 0
+                        color: controller.page_index == item['page_index']
                             ? Colors.white
                             : mainColor,
                       ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      controller.change_page(1);
-                    },
-                    child: AnimatedContainer(
-                      duration: Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
-                      padding: const EdgeInsets.all(17),
-                      decoration: BoxDecoration(
-                        color: controller.page_index == 1
-                            ? mainColor
-                            : Colors.transparent,
-                        borderRadius: BorderRadius.all(Radius.circular(12)),
-                      ),
-                      child: Icon(
-                        Icons.dashboard_outlined,
-                        size: 32,
-                        color: controller.page_index == 1
-                            ? Colors.white
-                            : mainColor,
-                      ),
-                    ),
-                  ),
-                ],
+                  );
+                }),
               ),
             ),
           ),
