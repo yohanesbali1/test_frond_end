@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testing_front_end_dev/app/core/helper/helper.dart';
 import 'package:testing_front_end_dev/app/core/theme/theme.dart';
 import 'package:testing_front_end_dev/app/data/models/models.dart';
+import 'package:testing_front_end_dev/app/modules/menu/controllers/menu_controller.dart';
 
-class ListItems extends StatelessWidget {
+class ListItems extends GetView<MenusController> {
   final Product product_item;
   const ListItems({required this.product_item});
 
@@ -79,7 +81,9 @@ class ListItems extends StatelessWidget {
                   ),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                controller.openModal(product_item);
+              },
               child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 200),
                 child: Row(

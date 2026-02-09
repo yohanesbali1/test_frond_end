@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:testing_front_end_dev/app/modules/menu/controllers/menu_controller.dart';
+import 'package:testing_front_end_dev/app/modules/menu/views/widget/item_add.dart';
 import 'package:testing_front_end_dev/app/modules/menu/views/widget/list_item.dart';
 
 class ProductItem extends GetView<MenusController> {
@@ -49,9 +50,14 @@ class ProductItem extends GetView<MenusController> {
                               scale: controller.scaleOf(index),
                               duration: const Duration(milliseconds: 90),
                               curve: Curves.easeOut,
-                              child: ListItems(
-                                product_item: productItem[index],
-                              ),
+                              child: index == 0
+                                  ? GestureDetector(
+                                      onTap: () {
+                                        controller.openModal();
+                                      },
+                                      child: ItemAdd(),
+                                    )
+                                  : ListItems(product_item: productItem[index]),
                             ),
                           );
                         },
