@@ -45,7 +45,15 @@ class SideBar extends GetView<HomeController> {
                     child: SizedBox(
                       width: 104,
                       height: 88,
-                      child: CustomPaint(painter: SidebarItemPainter(bgColor)),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: bgColor,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(24),
+                            bottomLeft: Radius.circular(24),
+                          ),
+                        ),
+                      ),
                     ),
                   ),
                   Center(
@@ -91,51 +99,4 @@ class SideBar extends GetView<HomeController> {
       ),
     );
   }
-}
-
-class SidebarItemPainter extends CustomPainter {
-  final Color color;
-
-  SidebarItemPainter(this.color);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
-
-    const double radius = 14;
-    const double curve = 22;
-
-    final path = Path();
-
-    // mulai kiri atas (rounded)
-    path.moveTo(0, radius);
-
-    path.quadraticBezierTo(0, 0, radius, 0);
-
-    // garis atas
-    path.lineTo(size.width - curve, 0);
-
-    // lengkungan keluar kanan
-    path.quadraticBezierTo(
-      size.width,
-      size.height / 2,
-      size.width - curve,
-      size.height,
-    );
-
-    // garis bawah
-    path.lineTo(radius, size.height);
-
-    // kiri bawah (rounded)
-    path.quadraticBezierTo(0, size.height, 0, size.height - radius);
-
-    path.close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
