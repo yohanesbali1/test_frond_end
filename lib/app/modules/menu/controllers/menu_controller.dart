@@ -17,6 +17,10 @@ class MenusController extends GetxController {
     super.onInit();
     getProducts();
     getCategory();
+    ever(selectedCategory, (_) {
+      print('Category berubah: ');
+      getProducts();
+    });
   }
 
   @override
@@ -32,6 +36,7 @@ class MenusController extends GetxController {
   Future<void> getProducts() async {
     try {
       isLoading.value = true;
+      print(selectedCategory.value?.id);
       var response = await productProvider.getProducts(
         categoryId: selectedCategory.value?.id ?? null,
       );

@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testing_front_end_dev/app/core/theme/theme.dart';
-import 'package:testing_front_end_dev/app/modules/casher/views/widget/category.dart';
+import 'package:testing_front_end_dev/app/modules/menu/views/widget/category.dart';
 import 'package:testing_front_end_dev/app/modules/menu/controllers/menu_controller.dart';
 import 'package:testing_front_end_dev/app/modules/menu/views/widget/item.dart';
-import 'package:testing_front_end_dev/app/modules/menu/views/widget/list_item.dart';
 
 class MenuView extends GetView<MenusController> {
   const MenuView({super.key});

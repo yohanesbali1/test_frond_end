@@ -11,6 +11,7 @@ class CategoryItem extends GetView<CasherController> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
+      margin: EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
         border: Border(bottom: BorderSide(color: borderMain, width: 1)),
       ),
