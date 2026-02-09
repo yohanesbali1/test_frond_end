@@ -33,6 +33,7 @@ class HomeView extends GetView<HomeController> {
             ),
             Expanded(
               child: PageView(
+                physics: const BouncingScrollPhysics(),
                 controller: controller.pageController,
                 onPageChanged: (index) {
                   controller.changePage(index);
