@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:testing_front_end_dev/app/modules/casher/controllers/checkout_controller.dart';
 import 'package:testing_front_end_dev/app/modules/casher/views/widget/modal/checkout/credit_cart.dart';
 import 'package:testing_front_end_dev/app/modules/casher/views/widget/modal/checkout/option_payment.dart';
+import 'package:testing_front_end_dev/app/modules/casher/views/widget/modal/checkout/order_table.dart';
 
 class FormCheckout extends GetView<CheckoutController> {
   const FormCheckout({super.key});
@@ -39,6 +40,7 @@ class FormCheckout extends GetView<CheckoutController> {
             if (paymentSelected.value == 'credit') return CreditCart();
             return Container();
           }),
+          OrderTable(),
         ],
       ),
     );

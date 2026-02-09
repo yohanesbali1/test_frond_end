@@ -15,7 +15,7 @@ class CustomDialog {
     String textCancel = "Batal",
     VoidCallback? onConfirm,
     VoidCallback? onCancel,
-    bool barrierDismissible = true,
+    bool barrierDismissible = false,
     bool contentOnTop = false,
   }) {
     Get.generalDialog(

@@ -113,6 +113,7 @@ class CheckoutController extends GetxController {
 
   Future<void> submit() async {
     bool isValid = true;
+    bool isValidTable = true;
     if (paymentType.value == "credit") {
       isValid = [
         validateCardName(),
@@ -123,7 +124,8 @@ class CheckoutController extends GetxController {
         validateTable(),
       ].every((v) => v);
     }
-    if (!isValid) {
+    isValidTable = [validateOrderType(), validateTable()].every((v) => v);
+    if (!isValid || !isValidTable) {
       CustomDialog.show(
         type: DialogType.error,
         content: Container(
