@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:testing_front_end_dev/app/core/helper/helper.dart';
 import 'package:testing_front_end_dev/app/core/theme/theme.dart';
 import 'package:testing_front_end_dev/app/modules/dashboard/controllers/dashboard_controller.dart';
 
@@ -138,7 +139,7 @@ class OrderReport extends GetView<DashboardController> {
                           horizontal: 24,
                         ),
                         child: Text(
-                          item['totalPayment'].toString(),
+                          Helper.formatRupiah(item['totalPayment'].toDouble()),
                           style: GoogleFonts.barlow(
                             fontWeight: FontWeight.w400,
                             fontSize: 14,

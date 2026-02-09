@@ -14,18 +14,24 @@ class DashboardController extends GetxController {
       "value": 151248138,
       "name": "Total Revenue",
       "icon": Icons.attach_money_outlined,
+      "icon_color": Colors.deepPurpleAccent,
+      "withCurrency": true,
     },
     {
       "percent": -12.40,
       "value": 23.456,
       "name": "Total Dish Orderd",
       "icon": Icons.bookmark_border,
+      "icon_color": Colors.orange,
+      "withCurrency": false,
     },
     {
       "percent": 2.40,
       "value": 1234,
       "name": "Total Customer",
       "icon": Icons.groups_2_outlined,
+      "icon_color": Colors.lightBlueAccent,
+      "withCurrency": false,
     },
   ];
 
