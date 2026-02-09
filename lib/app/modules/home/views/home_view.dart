@@ -6,6 +6,7 @@ import 'package:testing_front_end_dev/app/modules/casher/views/casher_view.dart'
 import 'package:testing_front_end_dev/app/modules/dashboard/views/dashboard_view.dart';
 import 'package:testing_front_end_dev/app/modules/home/controllers/home_controller.dart';
 import 'package:testing_front_end_dev/app/modules/home/views/widget/sidebar.dart';
+import 'package:testing_front_end_dev/app/modules/menu/views/menu_view.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
@@ -36,7 +37,7 @@ class HomeView extends GetView<HomeController> {
                 onPageChanged: (index) {
                   controller.changePage(index);
                 },
-                children: [CasherView(), DashboardView()],
+                children: [CasherView(), DashboardView(), MenuView()],
               ),
             ),
           ],

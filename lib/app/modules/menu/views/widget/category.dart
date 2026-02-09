@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testing_front_end_dev/app/core/theme/theme.dart';
-import 'package:testing_front_end_dev/app/modules/casher/controllers/casher_controller.dart';
+import 'package:testing_front_end_dev/app/modules/menu/controllers/menu_controller.dart';
 
-class CategoryItem extends GetView<CasherController> {
+class CategoryItem extends GetView<MenusController> {
   const CategoryItem({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
+      margin: EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
         border: Border(bottom: BorderSide(color: borderMain, width: 1)),
       ),

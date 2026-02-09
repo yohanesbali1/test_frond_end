@@ -8,6 +8,7 @@ class HomeController extends GetxController {
   final List<Map<String, dynamic>> listMenu = [
     {"icon": Icons.home_outlined, 'page_index': 0},
     {"icon": Icons.dashboard_outlined, 'page_index': 1},
+    {"icon": Icons.settings_outlined, 'page_index': 2},
   ];
   RxInt animatingIndex = (-1).obs;
   @override

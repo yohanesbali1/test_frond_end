@@ -88,27 +88,33 @@ class MostOrder extends GetView<DashboardController> {
               ),
             ),
           ),
-          SizedBox(
-            width: double.infinity,
-            height: 48,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-                disabledBackgroundColor: mainColor.withOpacity(0.6),
-                shape: RoundedRectangleBorder(
-                  side: BorderSide(color: mainColor),
-                  borderRadius: BorderRadius.circular(8),
+          Obx(
+            () => SizedBox(
+              width: double.infinity,
+              height: 48,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  disabledBackgroundColor: controller.isShow.value
+                      ? mainColor.withOpacity(0.6)
+                      : redColor.withOpacity(0.6),
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(
+                      color: controller.isShow.value ? mainColor : redColor,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                 ),
-              ),
-              onPressed: () {
-                controller.isShow(!controller.isShow.value);
-              },
-              child: Text(
-                "View All",
-                style: GoogleFonts.barlow(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: mainColor,
+                onPressed: () {
+                  controller.isShow(!controller.isShow.value);
+                },
+                child: Text(
+                  "${controller.isShow.value ? 'View All' : 'Hide'} Most Order",
+                  style: GoogleFonts.barlow(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: controller.isShow.value ? mainColor : redColor,
+                  ),
                 ),
               ),
             ),
