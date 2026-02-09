@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testing_front_end_dev/app/core/theme/theme.dart';
+import 'package:testing_front_end_dev/app/core/widgets/text_form.widget.dart';
 import 'package:testing_front_end_dev/app/modules/casher/views/widget/category.dart';
 import 'package:testing_front_end_dev/app/modules/casher/views/widget/item.dart';
 import 'package:testing_front_end_dev/app/modules/casher/views/widget/order/order.dart';
@@ -50,6 +51,23 @@ class CasherView extends GetView<CasherController> {
                               style: GoogleFonts.barlow(fontSize: 16),
                             ),
                           ],
+                        ),
+                        const Spacer(),
+                        SizedBox(
+                          width: 260,
+                          child: CustomInputField(
+                            controller: controller.searchController,
+                            hintText: 'Search for food, coffee, etc...',
+                            keyboardType: TextInputType.text,
+                            onChanged: (value) {
+                              controller.searchProduct(value);
+                            },
+                            prefix: Icon(
+                              Icons.search_sharp,
+                              size: 22,
+                              color: secondaryTextColor,
+                            ),
+                          ),
                         ),
                       ],
                     ),

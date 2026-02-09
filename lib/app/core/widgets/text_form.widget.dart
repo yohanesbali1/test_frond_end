@@ -22,6 +22,8 @@ class CustomInputField extends StatefulWidget {
   // External validation
   final String? errorText;
 
+  final Widget? prefix;
+
   const CustomInputField({
     Key? key,
     this.controller,
@@ -35,6 +37,7 @@ class CustomInputField extends StatefulWidget {
     this.isPassword = false,
     this.isDate = false,
     this.errorText,
+    this.prefix,
   }) : super(key: key);
 
   @override
@@ -146,6 +149,14 @@ class _CustomInputFieldState extends State<CustomInputField> {
       contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
       fillColor: bgInput,
       filled: true,
+      prefixIcon: widget.prefix != null
+          ? Padding(
+              padding: const EdgeInsets.only(left: 12, right: 4),
+              child: widget.prefix,
+            )
+          : null,
+
+      prefixIconConstraints: const BoxConstraints(minWidth: 36, minHeight: 36),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10),
         borderSide: BorderSide(color: borderMain, width: 2),

@@ -10,16 +10,24 @@ class ProductProvider extends GetConnect {
     httpClient.baseUrl = 'YOUR-API-URL';
   }
 
-  Future<List<Product>> getProducts({int? categoryId}) async {
+  Future<List<Product>> getProducts({int? categoryId, String? search}) async {
     try {
       final data = await rootBundle.loadString('assets/json/product.json');
       final response = jsonDecode(data) as List;
 
-      final filteredProducts = categoryId == null
-          ? response
-          : response
-                .where((item) => item['category_id'] == categoryId)
-                .toList();
+      final filteredProducts = response.where((item) {
+        final matchCategory =
+            categoryId == null || item['category_id'] == categoryId;
+
+        final matchSearch =
+            search == null ||
+            search.isEmpty ||
+            item['name'].toString().toLowerCase().contains(
+              search.toLowerCase(),
+            );
+
+        return matchCategory && matchSearch;
+      }).toList();
 
       return filteredProducts.map<Product>((x) => Product.fromJson(x)).toList();
     } catch (e) {

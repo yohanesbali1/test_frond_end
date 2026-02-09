@@ -16,6 +16,8 @@ class CasherController extends GetxController {
   final isLoading = true.obs;
   final ProductProvider productProvider = ProductProvider();
   final CategoryProvider categoryProvider = CategoryProvider();
+  final TextEditingController searchController = TextEditingController();
+  final searchProduct = ''.obs;
   final Map<int, double> scales = {};
   double scaleOf(int index) => scales[index] ?? 1.0;
 
@@ -26,6 +28,11 @@ class CasherController extends GetxController {
     getCategory();
 
     ever(selectedCategory, (_) => getProducts());
+    debounce(
+      searchProduct,
+      (_) => getProducts(),
+      time: const Duration(milliseconds: 500),
+    );
   }
 
   @override
@@ -47,6 +54,7 @@ class CasherController extends GetxController {
       isLoading.value = true;
       var response = await productProvider.getProducts(
         categoryId: selectedCategory.value?.id ?? null,
+        search: searchProduct.value,
       );
       products.value = response;
     } catch (e) {
