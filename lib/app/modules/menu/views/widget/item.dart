@@ -17,10 +17,6 @@ class ProductItem extends GetView<MenusController> {
           Expanded(
             child: Obx(() {
               final productItem = controller.products;
-
-              if (productItem.isEmpty) {
-                return const EmptyProduct();
-              }
               return AnimatedSwitcher(
                 duration: const Duration(milliseconds: 300),
                 switchInCurve: Curves.easeIn,
