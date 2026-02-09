@@ -3,6 +3,7 @@ import 'package:get/state_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:testing_front_end_dev/app/core/theme/theme.dart';
 import 'package:testing_front_end_dev/app/modules/dashboard/controllers/dashboard_controller.dart';
+import 'package:testing_front_end_dev/app/modules/dashboard/views/chart/type_order_chart.dart';
 
 class MostTypeOrder extends GetView<DashboardController> {
   const MostTypeOrder({super.key});
@@ -11,7 +12,6 @@ class MostTypeOrder extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: bgsecondColor,
         borderRadius: BorderRadius.circular(12),
@@ -19,7 +19,7 @@ class MostTypeOrder extends GetView<DashboardController> {
       child: Column(
         children: [
           Container(
-            padding: const EdgeInsets.only(bottom: 24),
+            padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
               border: Border(bottom: BorderSide(color: borderMain, width: 1)),
             ),
@@ -35,10 +35,11 @@ class MostTypeOrder extends GetView<DashboardController> {
               ],
             ),
           ),
+
           Expanded(
             child: ScrollConfiguration(
               behavior: const ScrollBehavior().copyWith(overscroll: false),
-              child: Container(),
+              child: TypeOrderChart(),
             ),
           ),
         ],

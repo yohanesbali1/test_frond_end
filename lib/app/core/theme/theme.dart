@@ -11,6 +11,9 @@ Color borderMain = const Color(0xFF393C49);
 Color redColor = const Color(0xFFEA7C69);
 Color iconColor = const Color(0xFFD64418);
 Color bgInput = const Color(0xFF2D303E);
+Color yellowGrafic = const Color(0xFFFFB800);
+Color yellowPrimaryColor = const Color(0xFFDF8109);
+Color yellowSecondColor = const Color(0xFFFFA900);
 
 Color bgGreen = const Color.fromARGB(255, 11, 68, 51);
 Color textGreen = const Color(0xFF50D1AA);

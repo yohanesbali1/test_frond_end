@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:testing_front_end_dev/app/modules/menu/views/widget/empty_product.dart';
 import 'package:testing_front_end_dev/app/modules/menu/controllers/menu_controller.dart';
 import 'package:testing_front_end_dev/app/modules/menu/views/widget/item_add.dart';
 import 'package:testing_front_end_dev/app/modules/menu/views/widget/list_item.dart';
@@ -16,6 +17,10 @@ class ProductItem extends GetView<MenusController> {
           Expanded(
             child: Obx(() {
               final productItem = controller.products;
+
+              if (productItem.isEmpty) {
+                return const EmptyProduct();
+              }
               return AnimatedSwitcher(
                 duration: const Duration(milliseconds: 300),
                 switchInCurve: Curves.easeIn,
